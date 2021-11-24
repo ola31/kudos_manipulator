@@ -41,7 +41,9 @@ void OpenManipulator::initOpenManipulator(bool using_actual_robot_state, STRING 
   addJoint("joint1",  // my name
            "world",   // parent name
            "joint2",  // child name
-            math::vector3(0.024, 0.0, 0.019),                // relative position
+            //math::vector3(0.024, 0.0, 0.019),                // relative position
+           //math::vector3(0.024, 0.0, 0.045),                // relative position
+           math::vector3(0.0, 0.0, 0.045),                // relative position
             math::convertRPYToRotationMatrix(0.0, 0.0, 0.0), // relative orientation
             Z_AXIS,    // axis of rotation
             11,        // actuator id
@@ -59,7 +61,8 @@ void OpenManipulator::initOpenManipulator(bool using_actual_robot_state, STRING 
   addJoint("joint2",  // my name
             "joint1",  // parent name
             "joint3",  // child name
-            math::vector3(0.0, 0.0, 0.1165),                // relative position
+            //math::vector3(0.0, 0.0, 0.1165),                // relative position
+           math::vector3(0.0, 0.0, 0.1005),                // relative position
             math::convertRPYToRotationMatrix(0.0, 0.0, 0.0), // relative orientation
             Y_AXIS,    // axis of rotation
             12,        // actuator id
@@ -78,7 +81,8 @@ void OpenManipulator::initOpenManipulator(bool using_actual_robot_state, STRING 
             "joint2",  // parent name
             "joint4",  // child name
             //math::vector3(0.061, 0.0, 0.3095),               // relative position
-            math::vector3(0.0, 0.0, 0.3095),               // relative position
+            math::vector3(0.0, 0.0, 0.3855),               // relative position
+           //math::vector3(0.0, 0.0, 0.4595),               // relative position
             math::convertRPYToRotationMatrix(0.0, 0.0, 0.0), // relative orientation
             Y_AXIS,    // axis of rotation
             13,        // actuator id
@@ -96,8 +100,8 @@ void OpenManipulator::initOpenManipulator(bool using_actual_robot_state, STRING 
             "joint3",  // parent name
             "gripper", // child name
             //math::vector3(0.2505, 0.0, 0.0),                 // relative position
-            math::vector3(0.3115, 0.0, 0.0),                 // relative position
-            //math::vector3(0.3615, 0.0, 0.0),                 // relative position
+            //math::vector3(0.3115, 0.0, 0.0),                 // relative position
+            math::vector3(0.3905, 0.0, 0.0),                 // relative position
             math::convertRPYToRotationMatrix(0.0, 0.0, 0.0), // relative orientation
             Y_AXIS,    // axis of rotation
             14,        // actuator id
