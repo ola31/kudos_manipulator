@@ -63,6 +63,7 @@ void OpenManipulatorTeleop::initSubscriber()
   joint_states_sub_ = node_handle_.subscribe("joint_states", 10, &OpenManipulatorTeleop::jointStatesCallback, this);
   kinematics_pose_sub_ = node_handle_.subscribe("kinematics_pose", 10, &OpenManipulatorTeleop::kinematicsPoseCallback, this);
   open_topic_sub_woo=node_handle_.subscribe("open_key_num",1000,&OpenManipulatorTeleop::opensubCallback,this);//kudossub
+  open_delta_woo=node_handle_.subscribe("open_delta_xyz",1000,&OpenManipulatorTeleop::opendeltaCallback,this);//delta
 }
 
 void OpenManipulatorTeleop::jointStatesCallback(const sensor_msgs::JointState::ConstPtr &msg)
@@ -283,6 +284,27 @@ void OpenManipulatorTeleop::printText()
   printf("---------------------------\n");
 
 }
+void OpenManipulatorTeleop::opendeltaCallback(const geometry_msgs::Vector3::ConstPtr opendelta_msg){//delta
+
+
+float delta_x = opendelta_msg->x;
+float delta_y = opendelta_msg->y;
+float delta_z = opendelta_msg->z;
+
+std::vector<double> goalPose;  goalPose.resize(3, 0.0);
+std::vector<double> goalJoint; goalJoint.resize(NUM_OF_JOINT, 0.0);
+
+goalPose.at(0) = delta_x;
+goalPose.at(1) = delta_y;
+goalPose.at(2) = delta_z;
+
+setTaskSpacePathFromPresentPositionOnly(goalPose, PATH_TIME);
+
+
+}
+
+
+
 
 void OpenManipulatorTeleop::opensubCallback(const std_msgs::Int8::ConstPtr opensub_msg){
 int open_ch_subnum=opensub_msg->data;
@@ -755,12 +777,12 @@ int main(int argc, char **argv)
     openManipulatorTeleop.setGoal(ch);
   }*/
 
-  while (ros::ok() && (ch = std::getchar()) != 'q')
+  while (ros::ok())// && (ch = std::getchar()) != 'q')
   {
     ros::spinOnce();
-    openManipulatorTeleop.printText();
-    ros::spinOnce();
-    openManipulatorTeleop.setGoal(ch);
+    //openManipulatorTeleop.printText();
+   // ros::spinOnce();
+   // openManipulatorTeleop.setGoal(ch);
   }
 
   return 0;

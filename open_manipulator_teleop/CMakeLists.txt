@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
     sensor_msgs
     open_manipulator_msgs
     dynamixel_sdk #kudos
+    geometry_msgs
 
 )
 
@@ -36,7 +37,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES dynamixel_workbench_toolbox #kudos
-  CATKIN_DEPENDS roscpp std_msgs sensor_msgs open_manipulator_msgs dynamixel_sdk #kudos
+  CATKIN_DEPENDS roscpp std_msgs sensor_msgs open_manipulator_msgs dynamixel_sdk geometry_msgs#kudos
 )
 
 ################################################################################
@@ -59,6 +60,13 @@ add_executable(open_manipulator_teleop_xyz src/open_manipulator_teleop_xyz.cpp)
 add_dependencies(open_manipulator_teleop_xyz ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(open_manipulator_teleop_xyz ${catkin_LIBRARIES} )
 
+add_executable(open_manipulator_teleop_topicpub src/open_manipulator_teleop_topicpub.cpp)
+add_dependencies(open_manipulator_teleop_topicpub ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(open_manipulator_teleop_topicpub ${catkin_LIBRARIES} )
+
+add_executable(open_manipulator_teleop_keyboard_sub src/open_manipulator_teleop_keyboard_sub.cpp)
+add_dependencies(open_manipulator_teleop_keyboard_sub ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(open_manipulator_teleop_keyboard_sub ${catkin_LIBRARIES} )
 ################################################################################
 # Install
 ################################################################################

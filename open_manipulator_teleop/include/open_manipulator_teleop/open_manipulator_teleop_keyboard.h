@@ -28,6 +28,10 @@
 #include "open_manipulator_msgs/SetKinematicsPose.h"
 #include "open_manipulator_msgs/setxyz.h" //kudos
 
+#include "std_msgs/String.h" //kudospub
+#include "std_msgs/Int8.h"//kudospub
+
+#include "geometry_msgs/Vector3.h" //deltasub
 /*/kudos
 #include "open_manipulator_msgs/OpenManipulatorState.h"
 #include "open_manipulator_msgs/SetActuatorState.h"
@@ -86,10 +90,13 @@ class OpenManipulatorTeleop
   *****************************************************************************/
   ros::Subscriber joint_states_sub_;
   ros::Subscriber kinematics_pose_sub_;
+  ros::Subscriber open_topic_sub_woo;
+  ros::Subscriber open_delta_woo;
 
   void jointStatesCallback(const sensor_msgs::JointState::ConstPtr &msg);
   void kinematicsPoseCallback(const open_manipulator_msgs::KinematicsPose::ConstPtr &msg);
-
+  void opensubCallback(const std_msgs::Int8::ConstPtr opensub_msg);//kudossub
+  void opendeltaCallback(const geometry_msgs::Vector3::ConstPtr opendelta_msg); //delta
   /*****************************************************************************
   ** ROS Clients and Callback Functions
   *****************************************************************************/

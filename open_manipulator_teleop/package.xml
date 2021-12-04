@@ -22,5 +22,6 @@
   <depend>sensor_msgs</depend>
   <depend>open_manipulator_msgs</depend>
   <depend>dynamixel_sdk</depend>
+  <depend>geometry_msgs</depend>
 
 </package>
