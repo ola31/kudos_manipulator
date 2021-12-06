@@ -33,6 +33,7 @@ OpenManipulatorTeleop::OpenManipulatorTeleop()
   ************************************************************/
   initSubscriber();
   initClient();
+  arm_status_joy_pub_ = node_handle_.advertise<std_msgs::Bool>("/arm_status/joy", 10);
 
   ROS_INFO("OpenManipulator teleoperation using joystick start");
 }
@@ -116,6 +117,9 @@ void OpenManipulatorTeleop::joyCallback(const sensor_msgs::Joy::ConstPtr &msg)
 void OpenManipulatorTeleop::teleoponoffCallback(const std_msgs::Int8::ConstPtr &msg)
 {
   teleoponoff_g=msg->data;
+  std_msgs::Bool arm_status_joy_msg;
+  arm_status_joy_msg.data = 1;
+  arm_status_joy_pub_.publish(arm_status_joy_msg);
 }
 
 bool OpenManipulatorTeleop::setJointSpacePath(std::vector<std::string> joint_name, std::vector<double> joint_angle, double path_time)

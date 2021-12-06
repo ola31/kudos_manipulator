@@ -30,6 +30,7 @@
 
 #include "std_msgs/String.h" //kudospub
 #include "std_msgs/Int8.h"//kudospub
+#include "std_msgs/Bool.h"
 
 #include "geometry_msgs/Vector3.h" //deltasub
 /*/kudos

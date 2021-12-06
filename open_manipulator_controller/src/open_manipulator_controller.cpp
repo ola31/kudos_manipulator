@@ -141,6 +141,7 @@ void OpenManipulatorController::initPublisher()
   }
   open_manipulator_states_pub_ = node_handle_.advertise<open_manipulator_msgs::OpenManipulatorState>("states", 10);
 
+
   if (using_platform_ == true)
   {
     open_manipulator_joint_states_pub_ = node_handle_.advertise<sensor_msgs::JointState>("joint_states", 10);
@@ -651,8 +652,14 @@ int main(int argc, char **argv)
   om_controller.startTimerThread();
   ros::Timer publish_timer = node_handle.createTimer(ros::Duration(om_controller.getControlPeriod()), &OpenManipulatorController::publishCallback, &om_controller);
   ros::Rate loop_rate(100);
+
+  ros::Publisher arm_states_pub_ = node_handle.advertise<std_msgs::Bool>("/arm_status/arm", 10);
+
+  std_msgs::Bool arm_status_arm_msg;
+  arm_status_arm_msg.data = 1;
   while (ros::ok())
   {
+    arm_states_pub_.publish(arm_status_arm_msg);  //used for gui state-led
     ros::spinOnce();
     loop_rate.sleep();
   }

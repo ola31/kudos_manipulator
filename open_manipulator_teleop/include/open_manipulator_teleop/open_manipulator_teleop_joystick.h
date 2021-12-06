@@ -25,6 +25,7 @@
 #include <sensor_msgs/JointState.h>
 #include <sensor_msgs/Joy.h>
 #include <std_msgs/Int8.h> //on off
+#include <std_msgs/Bool.h>
 
 #include "open_manipulator_msgs/SetJointPosition.h"
 #include "open_manipulator_msgs/SetKinematicsPose.h"
@@ -47,6 +48,8 @@ class OpenManipulatorTeleop
   *****************************************************************************/
   ros::NodeHandle node_handle_;
   ros::NodeHandle priv_node_handle_;
+
+  ros::Publisher arm_status_joy_pub_;
 
   /*****************************************************************************
   ** Init Functions

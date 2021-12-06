@@ -776,10 +776,16 @@ int main(int argc, char **argv)
     //ros::spinOnce();
     openManipulatorTeleop.setGoal(ch);
   }*/
+  ros::Rate loop_rate(100);
+  ros::Publisher arm_states_key_sub_pub_ = node_handle_.advertise<std_msgs::Bool>("/arm_status/key_sub", 10);
 
+  std_msgs::Bool arm_status_key_sub_msg;
+  arm_status_key_sub_msg.data = 1;
   while (ros::ok())// && (ch = std::getchar()) != 'q')
   {
+    arm_states_key_sub_pub_.publish(arm_status_key_sub_msg);
     ros::spinOnce();
+    loop_rate.sleep();
     //openManipulatorTeleop.printText();
    // ros::spinOnce();
    // openManipulatorTeleop.setGoal(ch);
